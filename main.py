@@ -68,8 +68,11 @@ Base.metadata.create_all(bind=engine)
 
 # FastAPI App Setup
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="static"), name="static")
+if os.path.exists("static"):
+    app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
+
+
 
 # Temporary Storage
 temp_storage = []
